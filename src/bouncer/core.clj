@@ -119,7 +119,7 @@ If you'd like to know more about the motivation behind `bouncer`, check the
     (if (pre-condition-met? pre acc)
       (if (or (and optional (nil? pred-subject))
               (not (empty? (get-in acc error-path)))
-              (apply pred pred-subject args))
+              (apply pred pred-subject acc args))
         acc
         (update-in acc error-path
                    #(conj % (message-fn {:path k, :value pred-subject
@@ -127,7 +127,6 @@ If you'd like to know more about the motivation behind `bouncer`, check the
                                          :metadata meta-with-defaults
                                          :message message}))))
       acc)))
-
 
 (defn- wrap-chain
   "Internal Use.
